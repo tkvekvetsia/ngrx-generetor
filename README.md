@@ -1,5 +1,7 @@
 # ngrx file generator
 
+## run npm install
+
 
 ## link to cli 
 
@@ -38,7 +40,7 @@ creates actionGroup with source `<stateName>` and actions
 
 ## `<stateName>`.reducers.ts
 
-generates `<stateName>` reducer with initialState 
+generates `<stateName>` reducer with initialState ond actions from `<stateName>`.actions.ts
 
 ## `<stateName>`.selectors.ts
 
