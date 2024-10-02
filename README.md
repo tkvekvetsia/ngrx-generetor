@@ -2,7 +2,8 @@
 
 
 ## link to cli 
-run `npm link` in the root of the project to link the cli `ngrx-custom`  to the global scope
+
+clone project and run `npm link` in the root of the project to link the cli `ngrx-custom`  to the global scope
 
 ## Commands
 run `ngrx-custom new <stateName>` to create  <stateName> folder
