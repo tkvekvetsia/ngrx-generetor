@@ -19,12 +19,31 @@ export const stateFileReducerContent = (name) => {
     const capitalizedName = capitalizeFirstLetter(name);
     return `import { createReducer, on } from '@ngrx/store';
 import { ${state(name)}} from './${name}.state';
+import { ${actionGroup(name)} } from './${name}.actions';
 
 export const ${reducer(name)} = createReducer(
     ${state(name)},
+    on( ${actionGroup(name)}.get${capitalizedName}, (state, action) => ({
+        ...state,
+        ${name}:{},
+        loading: true,
+        error: '',
+    })),
+    on( ${actionGroup(name)}.get${capitalizedName}Success, (state, action) => ({
+        ...state,
+        ${name}: action.${name},
+        loading: false,
+        error: '',
+    })),
+    on( ${actionGroup(name)}.get${capitalizedName}Failure, (state, action) => ({
+        ...state,
+        ${name}: {},
+        loading: false,
+        error: action.error,
+    }))
+    
 );
 `
-
 
 }
 //
@@ -34,7 +53,7 @@ export const actionFileContent = (name) => {
     return `import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import {${stateInterface(name)}} from './${name}.state';
 
-export const relatedUsersActions = createActionGroup({
+export const ${actionGroup(name)} = createActionGroup({
   source: '${source}',
   events: {
     get${capitalizedName}: emptyProps(),
@@ -102,6 +121,10 @@ const reducer = (name) => {
 const featureSelector = (name) =>{
     const capitalizedName = capitalizeFirstLetter(name);
     return `select${capitalizedName}State`
+}
+
+const actionGroup = name => {
+    return `${name}Actions`
 }
 
 function capitalizeFirstLetter(string) {
