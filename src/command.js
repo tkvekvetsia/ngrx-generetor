@@ -12,7 +12,7 @@ yargs(hideBin(process.argv)).command(
         });
     },
     async (argv) => {
-        console.log('Creating new state... <', argv.name + '>');
+        console.log('Creating new state... ', `<${argv.name}>`);
         if (argv.name) {
              await generateState(argv.name);
         }
