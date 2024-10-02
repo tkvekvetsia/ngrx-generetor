@@ -3,8 +3,8 @@ export const stateFileContent = (name) => {
     return `
 export interface ${stateInterface(name)} {
    ${name}: {},
-   loading: false, 
-   error: '',
+   loading: boolean, 
+   error: string,
 }  
     
 export const ${state(name)}: ${stateInterface(name)} = {
@@ -57,7 +57,7 @@ export const ${actionGroup(name)} = createActionGroup({
   source: '${source}',
   events: {
     get${capitalizedName}: emptyProps(),
-    get${capitalizedName}Success: props<{ users:any }>(),
+    get${capitalizedName}Success: props<{ ${name}:any }>(),
     get${capitalizedName}Failure: props<{ error: string }>(),
   },
 });
